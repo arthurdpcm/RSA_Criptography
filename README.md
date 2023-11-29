@@ -1,7 +1,32 @@
-# RSA_Encription
-#### Final semester project for the subject ***Programming and Algorithms*** at Aix-Marseille Université.
-## How RSA works
-![image](https://github.com/arthurdpcm/RSA_Encription/assets/61255233/4780f5bd-6eb8-44f3-b212-826a6eb03d61)
+# RSA Encryption Project
+
+This project, developed for the final semester of the **Programming and Algorithms** course at Aix-Marseille Université, explores the RSA encryption method. Below are the steps involved in the process:
+
+## How RSA Works
+![Diagram](https://github.com/arthurdpcm/RSA_Encription/assets/61255233/4780f5bd-6eb8-44f3-b212-826a6eb03d61)
+
+
+### Step 1:
+<img src="https://github.com/arthurdpcm/RSA_Encription/assets/61255233/7dd104d2-ca02-4ba7-bc96-068e066f5c32" width="800" height="500" />
+
+```python
+12616291, 65537
+```
+
+### Step 2:
+<img src="https://github.com/arthurdpcm/RSA_Encription/assets/61255233/8052aeef-ac92-477e-a58a-303cb6509470" width="800" height="600" />
+
+```python
+[2787639, 1567162, 5189040, 5189040, 240842, 9249679, 5535986, 12484563, 240842, 924404, 5189040, 12469187, 4833007]
+```
+
+### Step 3:
+<img src="https://github.com/arthurdpcm/RSA_Encription/assets/61255233/95eefed8-89bf-440e-bb39-4c346b8094d6" width="800" height="500" />
+
+```python
+'Hello, World!'
+```
+
 
 RSA Encription method. There is four files in this repository:
 - ## Encrypt.py
