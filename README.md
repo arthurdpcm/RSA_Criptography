@@ -28,4 +28,5 @@ RSA Encription method. There is four files in this repository:
 
 
 # References:
-- https://medium.com/@jinkyulim96/algorithms-explained-rsa-encryption-9a37083aaa62 
+- https://medium.com/@jinkyulim96/algorithms-explained-rsa-encryption-9a37083aaa62
+- https://www.techtarget.com/searchsecurity/definition/RSA
