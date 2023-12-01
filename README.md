@@ -1,7 +1,8 @@
 # RSA Encryption Project
 
+**!Warning** Python 3.12 does not accept the kivy version we used.
+
 This project, developed for the final semester of the **Programming and Algorithms** course at Aix-Marseille Université, explores the RSA encryption method. Below are the steps involved in the process:
-Python 3.12 does not accept the kivy version we used.
 
 ## How RSA Works
 ![Diagram](https://github.com/arthurdpcm/RSA_Encription/assets/61255233/4780f5bd-6eb8-44f3-b212-826a6eb03d61)
