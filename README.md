@@ -36,9 +36,9 @@ RSA Encription method. There is four files in this repository:
 - ## Decrypt.py
   #### This file uses Kivy to create the User Interface and it's where you are going to enter the key size (bits) to generate the public and private key, and also enter the encrypted message. 
 - ## rsa_simulation.py
-  #### This file run the process of encrypting and decrypting multiple times to compare how long takes to decrypt different sizes of key. It also plot the chart of it.
+  #### This file runs the process of encrypting and decrypting multiple times to compare how long it takes to decrypt different key sizes. It also plots the chart of it.
 - ## hack_rsa_parallel.py
-  #### This file tries to hack in a brute force the encrypted message. It runs from 5 bits to 15 bits running 10 times to have a best measure of how much time it takes. It also plot the chart of it. 
+  #### This file tries to hack using brute force the encrypted message. It runs 10 times from 5 bits to 15 bits to have a better measure of how much time it takes. It also plots the chart of it. 
 
 ## Libraries necessary to run the following code:
 - pip install kivy (encrypt.py and decrypt.py)
