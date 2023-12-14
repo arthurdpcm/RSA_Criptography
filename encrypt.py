@@ -9,10 +9,8 @@ class RSAEncryptApp(App):
     def build(self):
         self.n, self.e, self.d, self.phi_n = 0, 0, 0, 0
 
-
         self.public_key_entry = TextInput(multiline=False, hint_text='Enter public key in the format: n, e', height=50, size_hint=(None, None), size=(250, 100), pos_hint={'center_x': 0.5})
         self.message_entry = TextInput(multiline=True, hint_text='Enter message to encrypt', height=50, size_hint=(None, None), size=(250, 100), pos_hint={'center_x': 0.5})
-
 
         self.result_label = Label(
             text='',
@@ -26,13 +24,10 @@ class RSAEncryptApp(App):
             text_size=(None, None)  
         )
 
- 
         self.copy_button = Button(text='Copy Encrypted Message', size_hint=(None, 1), size=(200, 50), on_press=self.copy_encrypted_message)
         self.encrypt_button = Button(text='Encrypt', size_hint=(None, 1), size=(150, 50), on_press=self.encrypt_click)
 
-
         self.main_layout = BoxLayout(orientation='vertical', spacing=10, padding=10)
-
 
         title_label = Label(text='RSA Encryption', font_size='24sp', size_hint_y=None, height=150) 
         input_layout = BoxLayout(orientation='vertical', spacing=10, size_hint_y=None, height=200)
@@ -55,26 +50,27 @@ class RSAEncryptApp(App):
         self.main_layout.add_widget(button_layout)
         self.main_layout.add_widget(self.result_label)
         self.main_layout.add_widget(Label())  
-
-
         self.result_label.bind(size=self.on_label_size_change)
 
         return self.main_layout
 
     def encrypt_click(self, instance):
+        global encrypted_message
+
         message = self.message_entry.text
         public_key_str = self.public_key_entry.text
 
         try:
             self.public_key = tuple(map(int, public_key_str.split(',')))
             encrypted_message = self.rsa_encrypt(message, self.public_key)
+
             if len(encrypted_message) > 30:
                 self.result_label.text = f"Encrypted Message: {encrypted_message[:30]}...\n\nComplete encrypted message is too long. Complete message copy to clipboard!"
             else:
                 self.result_label.text = f"Encrypted Message: {encrypted_message}"
 
         except Exception as e:
-            self.result_label.text = f"Error: {str(e)}"  
+            self.result_label.text = f"Error: {str(e)}"
 
     def rsa_encrypt(self, message, public_key):
         n, e = public_key
@@ -83,8 +79,9 @@ class RSAEncryptApp(App):
         return encrypted_message
 
     def copy_encrypted_message(self, message):
-        Clipboard.copy(self.result_label.text.split('\n')[0].split(': ')[1])
-        print("Encrypted message copied to clipboard!")
+        encrypted_message_str = ', '.join(map(str, encrypted_message))
+        Clipboard.copy(encrypted_message_str)
+        print(f"Encrypted messages copied to clipboard!")
 
     def on_label_size_change(self, instance, value):
 
