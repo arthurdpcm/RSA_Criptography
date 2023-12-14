@@ -14,6 +14,7 @@ class RSADecryptApp(App):
     def build(self):
         Window.size = (1000, 600)
         self.n, self.e, self.d, self.phi_n = 0, 0, 0, 0
+        self.decrypted_message = ""
 
         self.bits_entry = TextInput(multiline=False, hint_text='Number of bits for encryption', height=50, size_hint=(None, None), size=(250, 100), pos_hint={'center_x': 0.5})
         self.message_entry = TextInput(multiline=True, hint_text='Message to encrypt or encrypted message', height=50, size_hint=(None, None), size=(250, 100), pos_hint={'center_x': 0.5})
@@ -89,21 +90,46 @@ class RSADecryptApp(App):
         else:
             return x % m
 
+
     def decrypt_click(self, instance):
         message = self.message_entry.text
-
         try:
             self.private_key = (self.n, self.d)
             decrypted_message = self.rsa_decrypt(eval(message), self.private_key)
-            self.result_label.text = f"Decrypted Message: {decrypted_message}"  
+
+            # Quebra a mensagem em linhas de até 50 caracteres e exibe na label
+            decrypted_message_lines = [decrypted_message[i:i+50] for i in range(0, len(decrypted_message), 50)]
+            formatted_message = '\n'.join(decrypted_message_lines)
+            self.decrypted_message = decrypted_message
+            if(len(message) > 200):
+                self.result_label.text = f"Decrypted Message:\n{formatted_message[0:200]}...\n Complete decrypted message is too long. Complete message copy to clipboard!"
+                
+            else:
+                self.result_label.text = f"Decrypted Message:\n{formatted_message}"
+            
 
         except Exception as e:
-            self.result_label.text = f"Error: {str(e)}"  
+            if(not self.d):
+                self.result_label.text = f"Error: Key not found."
+            else:
+                self.result_label.text = f"Error: {str(e)}"
 
     def rsa_decrypt(self, message, private_key):
         n, d = private_key
-        decrypted_message = [chr(pow(i, d, n)) for i in message]
-        return ''.join(decrypted_message)
+        decrypted_message = [pow(byte, d, n) for byte in message[:-1]]
+        partial_decryption = ''.join(chr(char) for char in decrypted_message)
+        
+        last_byte = pow(message[-1], d, n)
+        last_char = chr(last_byte)
+
+        full_decrypted_message = partial_decryption + last_char
+        return full_decrypted_message
+
+    # def rsa_decrypt(self, message, private_key):
+    #         n, d = private_key
+    #         decrypted_message = [chr(pow(i, d, n)) for i in message]
+    #         return ''.join(decrypted_message)
+    
 
     def generate_keys(self, bits):
         p = self.generate_prime(bits)
@@ -129,8 +155,8 @@ class RSADecryptApp(App):
         print("Public Key copied to clipboard!")
 
     def copy_decrypted_message(self, instance):
-        decrypted_message = self.result_label.text.split('Decrypted Message: ')[-1]
-        Clipboard.copy(decrypted_message)
+        # decrypted_message = self.result_label.text.split('Decrypted Message: ')[-1]
+        Clipboard.copy(self.decrypted_message)
         print("Decrypted message copied to clipboard!")
 
 if __name__ == '__main__':
